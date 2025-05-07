@@ -27,7 +27,9 @@ docker cp mini.sh ros2:/ROS2_interfaces
 docker exec -it ros2 bash -c  "cd /ROS2_interfaces && chmod +x mini.sh && ./mini.sh"
 ```
 
-# 获取真值（TUM数据集格式存储）和测量值（realsenset265.bag && benchmark/mini)
+# 获取真值和测量值
+
+TUM数据集格式存储，生成的真值位于vio_evaluation/gt.txt, 测量值位于：vio_evaluation/realsenset265.bag, benchmark/mini（ros2）
 
 ```bash
 python collect_data.py

@@ -22,16 +22,16 @@ evo_traj bag ./$dict/realsenset265.bag  /camera/odom/sample  --save_as_tum
 mv camera_odom_sample.tum t265.txt
 
 # 可视化比较mini和T265的轨迹，以ground truth为参考
-evo_traj tum t265.txt mini.txt -va --ref=./$dict/gt.txt -p  --change_unit mm &
+# evo_traj tum t265.txt mini.txt -va --ref=./$dict/gt.txt -p  --change_unit mm &
 
 # 计算mini轨迹的APE（绝对位姿误差）并绘图
-evo_ape tum ./$dict/gt.txt mini.txt -va --plot --change_unit mm &
+# evo_ape tum ./$dict/gt.txt mini.txt -va --plot --change_unit mm &
 
 # 计算mini轨迹的RPE（相对位姿误差）并绘图
-# evo_rpe tum ./$dict/gt.txt mini.txt -va --plot &
+# evo_rpe tum ./$dict/gt.txt mini.txt -va --plot --change_unit mm &
 
 # # 计算T265轨迹的APE（绝对位姿误差）并绘图
-evo_ape tum ./$dict/gt.txt t265.txt -va --plot --change_unit mm &
+# evo_ape tum ./$dict/gt.txt t265.txt -va --plot --change_unit mm &
 
 # # 计算T265轨迹的RPE（相对位姿误差）并绘图
-# evo_rpe tum ./$dict/gt.txt t265.txt -va --plot &
+evo_rpe tum ./$dict/gt.txt t265.txt -va --plot --change_unit mm &
