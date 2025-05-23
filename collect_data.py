@@ -322,6 +322,26 @@ def main():
         # 启动ros2 bag录制
         minibag_process = subprocess.Popen(['docker', 'exec', '-it',  'ros2', 'bash', '-c', 'cd /ROS2_interfaces && source /opt/ros/humble/setup.bash && ros2 bag record /baton_mini/stereo3/odometry -o /data/mini'])
         
+        # 启动数据采集进程
+        print("\nStarting data capture process...")
+        data_capture_process = subprocess.Popen(
+            ['bash', '-c', 'source ~/pika_ros/install/setup.bash && roslaunch data_tools run_data_capture.launch datasetDir:=/home/lei/agilex/data episodeIndex:=0'],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True
+        )
+        
+        # 等待一段时间检查进程是否正常启动
+        time.sleep(2)
+        if data_capture_process.poll() is not None:
+            # 如果进程已经结束，获取错误信息
+            error_output = data_capture_process.stderr.read()
+            print(f"数据采集进程启动失败！错误信息：\n{error_output}")
+            raise Exception("数据采集进程启动失败")
+        else:
+            print("数据采集进程已成功启动")
+        
         # 在程序结束时关闭录制
         def cleanup():
             if minibag_process.poll() is None:  # 检查进程是否还在运行
@@ -329,6 +349,13 @@ def main():
                 docker_exec_process.wait()
                 minibag_process.terminate()
                 minibag_process.wait()
+            
+            # 结束数据采集进程
+            if data_capture_process.poll() is None:
+                data_capture_process.stdin.write('\n')  # 发送回车键
+                data_capture_process.stdin.flush()
+                data_capture_process.terminate()
+                data_capture_process.wait()
         
         # 注册清理函数
         atexit.register(cleanup)

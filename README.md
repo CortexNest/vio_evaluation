@@ -44,7 +44,8 @@ sudo chown $USER:$USER -R mini
 mv mini testX/
 mv ../gt.txt testX/
 mv ../realsenset265.bag testX/
-evo_tra.sh testX
+cp -r $HOME/agile/data/episode0/localization/pose testX/
+evo_tra_t265_mini_vive.sh testX
 ```
 
-
+![可视化](./tra.png)
