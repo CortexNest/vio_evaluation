@@ -22,9 +22,11 @@ evo_traj bag ./$dict/realsenset265.bag  /camera/odom/sample  --save_as_tum
 mv camera_odom_sample.tum ./$dict/t265.txt
 
 # 将相对于各自的基坐标系位姿转换为相对于机械臂基坐标系的位姿
+cd ./$dict
 python3 convert_gt.py
 python3 convert_mini.py
-python3 agilex_pose_to_tum.py --input_dir ./$dict/pose/pika --output_file ./$dict/vive.txt
+python3 ../agilex_pose_to_tum.py --input_dir ./pose/pika --output_file ./vive.txt
+cd ..
 
 # python agilex_pose_to_tum.py --input_dir ./$dict/pose/pika --output_file ./$dict/vive.txt
 # 可视化比较mini和T265的轨迹，以ground truth为参考
