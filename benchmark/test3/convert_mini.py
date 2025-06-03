@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-def convert_to_gt_init(mini_file='mini.txt', output_file='mini.txt', roll_offset_deg=0):
+def convert_to_mini_init(mini_file='mini.txt', output_file='mini.txt', roll_offset_deg=0):
     with open(mini_file, 'r') as f:
         lines = f.readlines()
     # mini.txt初始四元数
@@ -30,4 +30,4 @@ def convert_to_gt_init(mini_file='mini.txt', output_file='mini.txt', roll_offset
             f.write(f"{timestamp} {x} {y} {z} {q_new[0]} {q_new[1]} {q_new[2]} {q_new[3]}\n")
 
 if __name__ == "__main__":
-    convert_to_gt_init()
+    convert_to_mini_init()

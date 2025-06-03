@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-def convert_gt_to_relative(input_file='gt.txt', output_file='gt_relative.txt'):
+def convert_gt_to_relative(input_file='gt_temp.txt', output_file='gt.txt'):
     """
     将gt.txt中的绝对位姿转换为相对于初始位置的位姿
     

@@ -41,9 +41,9 @@ python collect_data.py
 cd benchmark
 mkdir -p testX
 sudo chown $USER:$USER -R mini
-mv mini testX/
-mv ../gt.txt testX/
-mv ../realsenset265.bag testX/
+cp -r mini testX/
+cp ../gt.txt testX/gt_temp.txt
+cp ../realsenset265.bag testX/
 cp -r $HOME/agile/data/episode0/localization/pose testX/
 evo_tra_t265_mini_vive.sh testX
 ```

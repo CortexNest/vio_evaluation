@@ -1,5 +1,5 @@
 #! /bin/bash
-
+set -ex
 # 设置测试数据集目录名称
 dict=$1
 
@@ -30,7 +30,7 @@ cd ..
 
 # python agilex_pose_to_tum.py --input_dir ./$dict/pose/pika --output_file ./$dict/vive.txt
 # 可视化比较mini和T265的轨迹，以ground truth为参考
-evo_traj tum ./$dict/t265.txt ./$dict/mini.txt ./$dict/vive.txt -va --ref=./$dict/gt_relative.txt -p &
+evo_traj tum ./$dict/t265.txt ./$dict/mini.txt ./$dict/vive.txt -va --ref=./$dict/gt.txt -p &
 
 # evo_traj tum vive.txt -va --ref=gt1.txt -p
 #计算mini轨迹的APE（绝对位姿误差）并绘图
